@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Freind Finder</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Freind Finder</h1>
+      <h3>The greatest resource for finding freinds</h3>
+      <hr>
+      <a href="/"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-eye-open"></span> Search Freinds</button></a>
+      <a href= "/survey"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-plus"></span> Take Evaluation</button></a>
+    </div>
+    <div class="row">
+
+      <div class="col-lg-12">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Freind Database</strong></h3>
+          </div>
+          <div class="panel-body" id="well-section">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $.get("/api", function(data) {
+      for (var i = 0; i < data.length; i++) {
+        var wellSection = $("<div>");
+        wellSection.addClass("well");
+        wellSection.attr("id", "character-well-" + i);
+        $("#well-section").append(wellSection);
+        $("#character-well-" + i).append("<h2>" + data[i].name + "</h2>");
+        $("#character-well-" + i).append("<h3>Role: " + data[i].role + "</h4>");
+        $("#character-well-" + i).append("<h3>Age: " + data[i].age + "</h4>");
+        $("#character-well-" + i).append("<h3>Force Points: " + data[i].forcePoints + "</h4>");
+      }
+    });
+  </script>
+  
+</body>
+</html>
